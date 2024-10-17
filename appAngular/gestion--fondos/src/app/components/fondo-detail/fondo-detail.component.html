@@ -1,0 +1,6 @@
+<div *ngIf="fondo">
+  <h2>{{ fondo.nombre }} Detalles</h2>
+  <p>Monto Mínimo: {{ fondo.montoMinimo | currency }}</p>
+  <p>Categoría: {{ fondo.categoria }}</p>
+  <p>Monto de Vinculación: {{ fondo.montoVinculacion | currency }}</p>
+</div>

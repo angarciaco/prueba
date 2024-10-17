@@ -1,0 +1,15 @@
+<form (ngSubmit)="saveFondo()">
+  <label for="nombre">Nombre</label>
+  <input type="text" [(ngModel)]="fondo.nombre" name="nombre" required />
+
+  <label for="montoMinimo">Monto Mínimo</label>
+  <input type="number" [(ngModel)]="fondo.montoMinimo" name="montoMinimo" required />
+
+  <label for="categoria">Categoría</label>
+  <input type="text" [(ngModel)]="fondo.categoria" name="categoria" required />
+
+  <label for="montoVinculacion">Monto de Vinculación</label>
+  <input type="number" [(ngModel)]="fondo.montoVinculacion" name="montoVinculacion" required />
+
+  <button type="submit">Guardar</button>
+</form>
