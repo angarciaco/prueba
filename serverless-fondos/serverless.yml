@@ -1,0 +1,117 @@
+# "org" ensures this Service is used with the correct Serverless Framework Access Key.
+org: shpesm
+# "app" enables Serverless Framework Dashboard features and sharing them with other Services.
+app: app-fondos
+# "service" is the name of this project. This will also be added to your AWS resource names.
+service: serverless-fondos
+
+stages:
+  default:
+    params:
+      tableName: "users-table-${sls:stage}"
+      fondosTableName: "fondos-table-${sls:stage}"
+
+provider:
+  name: aws
+  runtime: nodejs20.x
+  iam:
+    role:
+      statements:
+        - Effect: Allow
+          Action:
+            - dynamodb:Query
+            - dynamodb:Scan
+            - dynamodb:GetItem
+            - dynamodb:PutItem
+            - dynamodb:UpdateItem
+            - dynamodb:DeleteItem
+          Resource:
+            - Fn::GetAtt: [UsersTable, Arn]
+            - Fn::GetAtt: [FondosTable, Arn]
+  environment:
+    USERS_TABLE: ${param:tableName}
+    FONDOS_TABLE: ${param:fondosTableName}
+
+functions:
+  api:
+    handler: handler.handler
+    events:
+      - httpApi:
+          path: /users
+          method: post
+      - httpApi:
+          path: /users
+          method: get
+
+  createFondo:
+    handler: createFondo.handler
+    events:
+      - http:
+          path: fondos
+          method: post
+          cors: true
+
+  getFondo:
+    handler: getFondo.handler
+    events:
+      - http:
+          path: fondos/{id}
+          method: get
+          cors: true
+
+  getFondos:
+    handler: getFondos.handler
+    events:
+      - http:
+          path: fondos
+          method: get
+          cors:
+            origin: '*'
+            headers:
+              - Content-Type
+              - X-Amz-Date
+              - Authorization
+              - X-Api-Key
+              - X-Amz-Security-Token
+              - X-Amz-User-Agent
+
+  updateFondo:
+    handler: updateFondo.handler
+    events:
+      - http:
+          path: fondos/{id}
+          method: put
+          cors: true
+
+  deleteFondo:
+    handler: deleteFondo.handler
+    events:
+      - http:
+          path: fondos/{id}
+          method: delete
+          cors: true
+
+resources:
+  Resources:
+    UsersTable:
+      Type: AWS::DynamoDB::Table
+      Properties:
+        TableName: ${param:tableName}
+        AttributeDefinitions:
+          - AttributeName: userId
+            AttributeType: S
+        KeySchema:
+          - AttributeName: userId
+            KeyType: HASH
+        BillingMode: PAY_PER_REQUEST
+    FondosTable:
+      Type: AWS::DynamoDB::Table
+      Properties:
+        TableName: ${param:fondosTableName}
+        AttributeDefinitions:
+          - AttributeName: id
+            AttributeType: S
+        KeySchema:
+          - AttributeName: id
+            KeyType: HASH
+        BillingMode: PAY_PER_REQUEST
