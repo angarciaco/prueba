@@ -14,6 +14,7 @@ Para descargar el repositorio, ejecuta el siguiente comando en la terminal:
 
 ```bash
 git clone https://github.com/angarciaco/prueba.git
+```
 
 
 Ejecución de la Aplicación Angular
@@ -23,6 +24,7 @@ Abre una terminal y dirígete al directorio appAngular/gestion-fondos:
 
 ```bash
 cd appAngular/gestion-fondos
+```
 
 Instalar dependencias:
 
@@ -30,6 +32,7 @@ Asegúrate de tener instaladas todas las dependencias de la aplicación:
 
 ```bash
 npm install
+```
 
 Iniciar la aplicación:
 
@@ -37,6 +40,7 @@ Para ejecutar la aplicación en modo de desarrollo, ejecuta:
 
 ```bash
 ng serve
+```
 
 Visualización:
 
@@ -44,6 +48,7 @@ Abre tu navegador en la siguiente URL para ver la aplicación en ejecución:
 
 ```bash
 http://localhost:4200
+```
 
 ## Despliegue de la Infraestructura Serverless
 
@@ -58,6 +63,7 @@ Crea un usuario en AWS IAM con los permisos adecuados, luego configura tus crede
 [default]
 aws_access_key_id = TU_ACCESS_KEY_ID
 aws_secret_access_key = TU_SECRET_ACCESS_KEY
+```
 
 Permisos necesarios en AWS
 El usuario de AWS debe tener los siguientes permisos para interactuar con los servicios:
@@ -91,6 +97,7 @@ Si se encuentra un conflicto con AWS Systems Manager, es necesario crear una pol
         }
     ]
 }
+```
 
 ## Despliegue con Serverless Framework
 Navegar al directorio de serverless:
@@ -99,6 +106,7 @@ Dirígete al directorio serverless-fondos usando la terminal:
 
 ```bash
 cd serverless-fondos
+```
 
 Desplegar la infraestructura:
 
@@ -106,6 +114,12 @@ Ejecuta el siguiente comando para desplegar las funciones Lambda y demás recurs
 
 ```bash
 sls deploy
+```
+
+## Estructura del Proyecto
+appAngular/gestion-fondos/: Aplicación frontend en Angular.
+serverless-fondos/: Backend con funciones lambda utilizando Serverless Framework.
+Prueba-Parte2-SQL-Query.txt: Contiene la query SQL correspondiente a la segunda parte de la prueba, representando el 20% de la misma.
 
 ## Contacto
-Si tienes alguna duda o sugerencia, no dudes en contactarme.
+Si tienes alguna duda o sugerencia, no dudes en contactarme
